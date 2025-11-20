@@ -58,13 +58,14 @@ function isCacheValid() {
 
 async function fetchGitHub(source) {
     try {
-        const response = await axios.get(source.url, {
-            timeout: CONFIG.sourceTimeout,
-            headers: {
-                'User-Agent': 'SFR-Mirror-Coordinator',
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
+const response = await axios.get(source.url, {
+    timeout: CONFIG.sourceTimeout,
+    headers: {
+        'User-Agent': 'SFR-Mirror-Coordinator',
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': `token ${process.env.GITHUB_TOKEN}`
+    }
+});
         
         const data = response.data;
         
